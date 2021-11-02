@@ -1,0 +1,1 @@
+http://www.fobec.com/java/965/lire-proprietes-fichier.html
