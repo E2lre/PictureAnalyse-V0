@@ -23,17 +23,17 @@ public class AnalyseControler {
         return "Hello";
     }
 /*
-Exeple d'appel : http://localhost:8099/infoAnalyse?fileName=D:/Documents E/git/PictureAnalyse-V0/picture&filePath=2021-Mars-DSC_0637.NEF
+Exemple d'appel : http://localhost:8099/infoAnalyse?fileName=D:/Documents E/git/PictureAnalyse-V0/picture&filePath=2021-Mars-DSC_0637.NEF
  */
     @GetMapping(value = "infoAnalyse")
-    public List<String> getInfoAnalyse(@RequestParam(name = "fileName") String fileName,@RequestParam(name = "filePath") String filePath)  {
+    public List<String> getInfoAnalyse(@RequestParam(name = "filePath") String filePath,@RequestParam(name = "fileName") String fileName)  {
         List<String> resultList = new ArrayList<>();
         if (fileName.isEmpty() || filePath.isEmpty())
         {
             resultList.add("fileName or filePath is empty");
         }
         else {
-            resultList = analyseService.getInfoAnalyse(fileName,filePath);
+            resultList = analyseService.getInfoAnalyse(filePath,fileName);
         }
 
         return resultList;

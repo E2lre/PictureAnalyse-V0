@@ -179,9 +179,9 @@ public class AnalyseServiceImpl implements AnalyseService {
     }
 
     @Override
-    public List<String> getInfoAnalyse(String fileName, String filePath) {
-        //String fullFileName="D:/Image E/Pictures/2021-03-Mars/Master-mars-2021/2021-Mars-DSC_0654.NEF";
-        String fullFileName=fileName+"/"+filePath;
+    public List<String> getInfoAnalyse(String filePath, String fileName) {
+        
+        String fullFileName=filePath+"/"+fileName;
         File file = new File(fullFileName);
         // SCENARIO 1: UNKNOWN FILE TYPE
         //

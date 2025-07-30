@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface AnalyseService {
     public FileInfo getFileInfo(String fileName, String filePath);
-    public List<String> getInfoAnalyse (String fileName, String filePath);
+    public List<String> getInfoAnalyse (String filePath,String fileName);
 }
