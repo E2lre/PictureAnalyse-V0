@@ -203,7 +203,73 @@ public class AnalyseServiceImpl implements AnalyseService {
 
         return null;
     }
+    
+    @Override
+    public String getNikonExposureSequenceNumber (String filePath,String fileName) {
+    	String result = "a mettre en place";
+    	String fullFileName=filePath+"/"+fileName;
+        File file = new File(fullFileName);
+        // SCENARIO 1: UNKNOWN FILE TYPE
+        //
+        // This is the most generic approach.  It will transparently determine the file type and invoke the appropriate
+        // readers.  In most cases, this is the most appropriate usage.  This will handle JPEG, TIFF, GIF, BMP and RAW
+        // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
+        //
+        try {
+            Metadata metadata = ImageMetadataReader.readMetadata(file);
 
+            return readNikonExposureSequenceNumber(metadata, "Using ImageMetadataReader");
+
+        } catch (ImageProcessingException e) {
+            print(e);
+        } catch (IOException e) {
+            print(e);
+        }
+    	
+    	
+    	
+    	return result;
+	}   
+    	
+    private static String readNikonExposureSequenceNumber(Metadata metadata, String method)
+    {
+        List<String> resultList = new ArrayList<>();
+        String result = "";
+
+        
+
+        //
+        // A Metadata object contains multiple Directory objects
+        //
+        for (Directory directory : metadata.getDirectories()) {
+
+            //
+            // Each Directory stores values in Tag objects
+            //
+            for (Tag tag : directory.getTags()) {
+            	if (tag.getTagName() == "Exposure Sequence Number") {
+            			result=tag.getDescription();	
+            			System.out.println("FOUND : "+ tag + "/" + tag.getTagName()+ "/" + tag.getDescription());
+            	};
+        
+            	
+                //System.out.println(tag);
+                resultList.add(tag.toString());
+            }
+
+            //
+            // Each Directory may also contain error messages
+            //
+            for (String error : directory.getErrors()) {
+                System.err.println("ERROR: " + error);
+                resultList.add("ERROR: " + error);
+            }
+        }
+        return result;
+    }
+  	 
+    
+    
     /**
      * Write all extracted values to stdout.
      */

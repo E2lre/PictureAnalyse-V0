@@ -24,3 +24,5 @@ MVN -DskipTests spring-boot:run
  Valeur à récupérer : [Nikon Makernote] Exposure Sequence Number
 
 C:/Users/Eric/OneDrive/Images/Master/2023-02-Fevrier/2023-Fevrier-DCS_0867.NEF
+
+  http://localhost:8099/getNikonExposureSequenceNumber?filePath=C:/Users/Eric/OneDrive/Images/Master/2023-02-Fevrier&fileName=2023-Fevrier-DCS_0867.NEF

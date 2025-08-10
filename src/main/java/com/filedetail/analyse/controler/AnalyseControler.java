@@ -38,4 +38,21 @@ Exemple d'appel : http://localhost:8099/infoAnalyse?fileName=D:/Documents E/git/
 
         return resultList;
     }
+    
+    /* Controler pour récupérer uniquement le Exposure Sequence Number en Nikon*/
+    @GetMapping(value = "getNikonExposureSequenceNumber")
+    public String getNikonExposureSequenceNumber(@RequestParam(name = "filePath") String filePath,@RequestParam(name = "fileName") String fileName)  {
+        String resultNikonESN = "";
+        if (fileName.isEmpty() || filePath.isEmpty())
+        {
+        	resultNikonESN="fileName or filePath is empty";
+        }
+        else {
+        	resultNikonESN = analyseService.getNikonExposureSequenceNumber(filePath,fileName); //CHANGER ICICICICICIC avec la nouvelle fonction
+        }
+        if (resultNikonESN.isEmpty()) {
+        	resultNikonESN = "Non trouvé";
+        }
+        return resultNikonESN;
+    }
 }
